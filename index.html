@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Maker</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #050505;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+    }
+
+    .glow1 {
+      top: -150px;
+      left: -150px;
+      background: rgba(132, 0, 255, 0.20);
+    }
+
+    .glow2 {
+      bottom: -150px;
+      right: -150px;
+      background: rgba(255, 0, 200, 0.15);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    header {
+      padding: 40px 0 20px;
+    }
+
+    .hero {
+      display: flex;
+      min-height: auto;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+    }
+
+    .hero-text,
+    .hero-image {
+      flex: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(132,0,255,0.12);
+      border: 1px solid rgba(168,85,247,0.25);
+      color: #c084fc;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: 56px;
+      line-height: 1.05;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
+
+    .hero-text p {
+      color: #b3b3b3;
+      font-size: 20px;
+      line-height: 1.7;
+      margin-bottom: 35px;
+      max-width: 580px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      font-size: 14px;
+      padding: 16px 30px;
+      border-radius: 16px;
+      font-weight: 700;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg,#7b2cff,#cc00ff);
+      color: white;
+      box-shadow: 0 0 30px rgba(132,0,255,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.12);
+      color: white;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 330px;
+      border-radius: 32px;
+      border: 1px solid rgba(168,85,247,0.25);
+      box-shadow: 0 0 50px rgba(132,0,255,0.20);
+    }
+
+    section {
+      padding: 45px 0;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .title h2 {
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .title p {
+      color: #a3a3a3;
+      font-size: 18px;
+    }
+
+    .cards,
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 25px;
+    }
+
+    .card,
+    .step {
+      padding: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 28px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+    }
+
+    .card:hover,
+    .step:hover {
+      transform: translateY(-5px);
+      border-color: rgba(168,85,247,0.35);
+    }
+
+    .emoji {
+      font-size: 45px;
+      margin-bottom: 18px;
+    }
+
+    .card h3,
+    .step h3 {
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    .card p,
+    .step p {
+      color: #b3b3b3;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .step img {
+      width: 100%;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+
+    .step h3 {
+      color: #c084fc;
+    }
+
+    .cta {
+      padding: 40px 20px;
+      border-radius: 35px;
+      background: linear-gradient(180deg, rgba(132,0,255,0.16), rgba(255,255,255,0.03));
+      border: 1px solid rgba(168,85,247,0.18);
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 46px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+
+    .cta p {
+      max-width: 760px;
+      margin: 0 auto 35px;
+      color: #b3b3b3;
+      line-height: 1.7;
+      font-size: 20px;
+    }
+
+    footer {
+      padding: 35px 20px;
+      text-align: center;
+      color: #777;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+
+    @media (max-width: 1024px) {
+      .cards,
+      .steps {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      h1 {
+        font-size: 52px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 35px 0;
+      }
+
+      header {
+        padding-top: 25px;
+      }
+      header {
+        padding-top: 50px;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 17px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .title h2,
+      .cta h2 {
+        font-size: 26px;
+      }
+
+      .cards,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image img {
+        max-width: 180px;
+      }
+
+      .cta p {
+        font-size: 17px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .title h2,
+      .cta h2 {
+        font-size: 28px;
+      }
+
+      .hero-text p,
+      .title p,
+      .cta p {
+        font-size: 15px;
+      }
+
+      .card,
+      .step,
+      .cta {
+        border-radius: 24px;
+      }
+
+      .hero-image img {
+        max-width: 220px;
+        border-radius: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow glow1"></div>
+  <div class="bg-glow glow2"></div>
+
+  <header>
+    <div class="container hero">
+      <div class="hero-text">
+        <div class="badge">🔥 Aplicativo profissional de currículos</div>
+
+        <h1>Crie currículos profissionais em poucos minutos</h1>
+
+        <p>
+          Monte currículos modernos direto pelo celular e exporte em PDF pronto para enviar para empresas.
+        </p>
+
+        <div class="buttons">
+          <a href="#comprar" class="btn btn-primary">QUERO O CV_MAKER</a>
+          <a href="#funciona" class="btn btn-secondary">VER DEMONSTRAÇÃO</a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="img/icon.png" alt="CV Maker">
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="title">
+        <h2>Tudo que você precisa</h2>
+        <p>Simples, moderno e profissional.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="emoji">📄</div>
+          <h3>PDF Profissional</h3>
+          <p>Exporte currículos prontos para enviar para empresas.</p>
+        </div>
+
+        <div class="card">
+          <div class="emoji">⚡</div>
+          <h3>Rápido</h3>
+          <p>Crie currículos completos em apenas alguns minutos.</p>
+        </div>
+
+        <div class="card">
+          <div class="emoji">🎨</div>
+          <h3>Layouts Modernos</h3>
+          <p>Design profissional que impressiona recrutadores.</p>
+        </div>
+
+        <div class="card">
+          <div class="emoji">📱</div>
+          <h3>Pelo Celular</h3>
+          <p>Monte tudo diretamente do smartphone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="funciona">
+    <div class="container">
+      <div class="title">
+        <h2>Veja como funciona</h2>
+        <p>Fácil até para quem nunca fez currículo.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <img src="img/passo 03.png" alt="Passo 1">
+          <h3>Passo 1</h3>
+          <p>Instale rapidamente o aplicativo no celular.</p>
+        </div>
+
+        <div class="step">
+          <img src="img/passo 04.png" alt="Passo 2">
+          <h3>Passo 2</h3>
+          <p>Abra o aplicativo e comece a criar seu currículo.</p>
+        </div>
+
+        <div class="step">
+          <img src="img/passo 05.png" alt="Passo 3">
+          <h3>Passo 3</h3>
+          <p>Preencha seus dados profissionais facilmente.</p>
+        </div>
+
+        <div class="step">
+          <img src="img/passo 06.png" alt="Passo 4">
+          <h3>Passo 4</h3>
+          <p>Gere um currículo profissional pronto em PDF.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="cta" id="comprar">
+        <h2>Seu próximo emprego começa aqui.</h2>
+
+        <p>
+          Tenha um currículo profissional pronto para impressionar recrutadores e aumentar suas chances de contratação.
+        </p>
+
+        <a href="https://hotmart.com" class="btn btn-primary">
+          COMPRAR AGORA
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 CV_Maker • Todos os direitos reservados.
+  </footer>
+
+</body>
+</html>
